@@ -9,19 +9,39 @@ import android.widget.EditText
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var button2 : Button
-    private lateinit var button3 : Button
+    private lateinit var buttonNext2 : Button
+    private lateinit var buttonNext3 : Button
+    private lateinit var button1: Button
+    private lateinit var button2: Button
     private val myLifecycleObserver = MyLifecycleObserver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        buttonNext2 = findViewById(R.id.button_next)
+        buttonNext3 = findViewById(R.id.button_3)
+        button1 = findViewById(R.id.button_1)
         button2 = findViewById(R.id.button_2)
-        button3 = findViewById(R.id.button_3)
+        button1.setOnClickListener {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.frame_layout, Fragment1())
+                    .commit()
+                Toast.makeText(this@MainActivity, "mở fragment", Toast.LENGTH_SHORT).show()
+            }
+
+        }
         button2.setOnClickListener {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.frame_layout, Fragment2())
+                    .commit()
+                Toast.makeText(this@MainActivity, "mở fragment", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        buttonNext2.setOnClickListener {
             startActivity(Intent(this@MainActivity,MainActivity2::class.java))
         }
-        button3.setOnClickListener {
+        buttonNext3.setOnClickListener {
             startActivity(Intent(this@MainActivity,MainActivity3::class.java))
         }
         Toast.makeText(this, "onCreate", Toast.LENGTH_SHORT).show()
